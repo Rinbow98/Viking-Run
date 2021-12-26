@@ -53,13 +53,14 @@
     <UnityVersion>2020.3.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GameIcon.cs" />
     <Compile Include="Assets\Scripts\VikingController.cs" />
     <Compile Include="Assets\Scripts\BridgeSensor.cs" />
-    <Compile Include="Assets\Scripts\MainCamera.cs" />
-    <Compile Include="Assets\Scripts\CoinSpawner.cs" />
     <Compile Include="Assets\Scripts\SceneSwitcher.cs" />
+    <Compile Include="Assets\Scripts\MainCamera.cs" />
     <Compile Include="Assets\Scripts\ExitGame.cs" />
-    <Compile Include="Assets\Scripts\GameIcon.cs" />
+    <Compile Include="Assets\Scripts\CoinSpawner.cs" />
+    <Compile Include="Assets\Scripts\GroundSpawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Fonts\OFL.txt" />

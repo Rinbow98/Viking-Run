@@ -64,30 +64,10 @@ public class VikingController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space) && onGround)
         {
-            rigidbody.velocity += JumpingForce * Time.deltaTime * Vector3.up;
+            rigidbody.AddForce(JumpingForce * Time.deltaTime * Vector3.up);
             jump = true;
         }
         
-        if (Input.GetMouseButtonDown(0))
-        {
-            RaycastHit raycastHit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out raycastHit))
-            {
-
-            }
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            RaycastHit raycastHit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out raycastHit))
-            {
-                meshAgent.SetDestination(raycastHit.point);
-            }
-        }
-
         animator.SetBool("Run", run);
         animator.SetBool("Jump", jump);
     }
