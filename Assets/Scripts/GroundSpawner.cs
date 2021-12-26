@@ -15,12 +15,14 @@ public class GroundSpawner : MonoBehaviour
     Vector3 rotation;
 
     int n;
+    int rotateCount;
 
     void Start()
     {
         groundList = new List<Transform>();
         rotation = Vector3.zero;
         n = 0;
+        rotateCount = 0;
 
         for(int i = 0; i < 30; i++)
         {
@@ -38,28 +40,47 @@ public class GroundSpawner : MonoBehaviour
 
                 if (prev.name == "module_02_tile_02_ac Variant(Clone)")
                 {
-                    if (Random.Range(0, 2) == 1)
+                    if (rotateCount == 2)
+                    {
+                        t = Instantiate(right);
+                        rotateCount = -1;
+                    }
+                    else if (rotateCount == -2)
                     {
                         t = Instantiate(left);
+                        rotateCount = 1;
+                    }
+                    else if (Random.Range(0, 2) == 1)
+                    {
+                        t = Instantiate(left);
+                        if (rotateCount == 1)
+                            rotateCount++;
+                        else
+                            rotateCount = 1;
                     }
                     else
                     {
                         t = Instantiate(right);
+                        if (rotateCount == -1)
+                            rotateCount--;
+                        else
+                            rotateCount = -1;
                     }
+
                     t.parent = transform;
                     t.Rotate(prev.eulerAngles);
                     t.position = prev.position;
-                    t.position += prev.rotation * new Vector3(0f, 0f, 8f);
+                    t.position += prev.rotation * new Vector3(0f, 0f, 15f);
                     groundList.Add(t);
                 }
-                else if (prev.name == "module_02_corner_convex_b Variant(Clone)")
+                else if (prev.name == "left_road(Clone)")
                 {
                     t = Instantiate(straight);
                     t.parent = transform;
                     t.Rotate(prev.eulerAngles);
                     t.Rotate(0f, -90f, 0f);
                     t.position = prev.position;
-                    t.position += prev.rotation * new Vector3(-8f, 0f, 0f);
+                    t.position += prev.rotation * new Vector3(-15f, 0f, 0f);
                     groundList.Add(t);
                     for (int j = Random.Range(3, 6); j >= 0; j--, i++)
                     {
@@ -69,36 +90,36 @@ public class GroundSpawner : MonoBehaviour
                         t.Rotate(prev.eulerAngles);
                         t.position = prev.position;
                         t.position += prev.rotation * new Vector3(0f, 0f, 8f);
-                        if (Random.Range(0, 6) == 0)
+                        if (Random.Range(0, 4) == 0)
                         {
                             Transform b = Instantiate(crossbar);
                             b.parent = t;
-                            b.Rotate(t.eulerAngles);
+                            b.Rotate(t.rotation.eulerAngles);
                             b.localPosition = new Vector3(0f, 1f, 0f);
 
                             Transform c = Instantiate(coin);
                             c.parent = t;
                             c.Rotate(t.eulerAngles);
-                            c.localPosition = new Vector3(0f, 3.5f, 0f);
+                            c.localPosition = new Vector3(0f, 5f, 0f);
                         }
-                        else if (Random.Range (0, 3) == 0)
+                        else if (Random.Range (0, 2) == 0)
                         {
                             Transform c = Instantiate(coin);
                             c.parent = t;
                             c.Rotate(t.eulerAngles);
-                            c.localPosition = new Vector3(0f, 3.5f, 0f);
+                            c.localPosition = new Vector3(0f, 5f, 0f);
                         }
                         groundList.Add(t);
                     }
                 }
-                else if (prev.name == "module_02_corner_convex_a Variant(Clone)")
+                else if (prev.name == "right_road(Clone)")
                 {
                     t = Instantiate(straight);
                     t.parent = transform;
                     t.Rotate(prev.eulerAngles);
                     t.Rotate(0f, 90f, 0f);
                     t.position = prev.position;
-                    t.position += prev.rotation * new Vector3(8f, 0f, 0f);
+                    t.position += prev.rotation * new Vector3(15f, 0f, 0f);
                     groundList.Add(t);
 
                     for (int j = Random.Range(3, 6); j >= 0; j--, i++)
@@ -109,7 +130,7 @@ public class GroundSpawner : MonoBehaviour
                         t.Rotate(prev.eulerAngles);
                         t.position = prev.position;
                         t.position += prev.rotation * new Vector3(0f, 0f, 8f);
-                        if (Random.Range(0, 6) == 0)
+                        if (Random.Range(0, 4) == 0 && prev.childCount != 3)
                         {
                             Transform b = Instantiate(crossbar);
                             b.parent = t;
@@ -119,14 +140,14 @@ public class GroundSpawner : MonoBehaviour
                             Transform c = Instantiate(coin);
                             c.parent = t;
                             c.Rotate(t.eulerAngles);
-                            c.localPosition = new Vector3(0f, 3.5f, 0f);
+                            c.localPosition = new Vector3(0f, 5f, 0f);
                         }
-                        else if (Random.Range(0, 3) == 0)
+                        else if (Random.Range(0, 2) == 0)
                         {
                             Transform c = Instantiate(coin);
                             c.parent = t;
                             c.Rotate(t.eulerAngles);
-                            c.localPosition = new Vector3(0f, 3.5f, 0f);
+                            c.localPosition = new Vector3(0f, 5f, 0f);
                         }
                         groundList.Add(t);
                     }
