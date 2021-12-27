@@ -1,18 +1,49 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
+
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
+    List<Vector3> positions;
+    public Transform player;
+
+    public int num = 500;
+    int index = 0;
+
     void Start()
     {
-        
+        positions = new List<Vector3>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        bool start = HowToPlay.GameStart;
+        if(start && num > 0)
+        {
+            positions.Add(player.position);
+            num--;
+        }
+        else if (start)
+        {
+            transform.position = new Vector3(positions[index].x, 2f, positions[index].z);
+            positions[index] = player.position;
+
+            transform.rotation = player.rotation;
+            transform.Rotate(-90f, 0f, 0f);
+
+            if (index == positions.Count - 1)
+                index = 0;
+            else
+                index++;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            FindObjectOfType<GameManager>().EndGame();
+        }
     }
 }

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
@@ -12,23 +9,21 @@ public class VikingController : MonoBehaviour
     [SerializeField] float MovingSpeed;
     [SerializeField] float JumpingForce;
 
-    CharacterController characterController;
     Rigidbody rigidbody;
     Animator animator;
 
     bool isIdle = true;
-    bool onGround = true;
-    bool run = true;
     bool jump = false;
     bool right = false;
     bool left = false;
+    bool run = true;
+    bool onGround = true;
     float rotateTimer = 0f;
 
     Transform ground = null;
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         rotateTimer = Time.time;
@@ -37,7 +32,8 @@ public class VikingController : MonoBehaviour
     void Update()
     {
         Vector3 lastPosition = transform.position;
-        transform.position += transform.rotation * Vector3.forward * MovingSpeed * Time.deltaTime;
+        if (HowToPlay.GameStart && run)
+            transform.position += transform.rotation * Vector3.forward * MovingSpeed * Time.deltaTime;
         
         if (!right && !left && Time.time - rotateTimer > 0.5f)
         {
@@ -51,7 +47,7 @@ public class VikingController : MonoBehaviour
             }
         }
 
-        if (Mathf.Abs(transform.position.x - ground.position.x) < 0.1f && Mathf.Abs(transform.position.z - ground.position.z) < 0.1f)
+        if (ground && Mathf.Abs(transform.position.x - ground.position.x) < 0.1f && Mathf.Abs(transform.position.z - ground.position.z) < 0.1f)
         {
             if (left)
             {
@@ -74,6 +70,13 @@ public class VikingController : MonoBehaviour
             rigidbody.AddForce(JumpingForce * Vector3.up);
             jump = true;
         }
+
+        if (transform.position.y < 0f)
+        {
+            run = false;
+            onGround = false;
+            FindObjectOfType<GameManager>().EndGame();
+        }
         
         animator.SetBool("Run", run);
         animator.SetBool("Jump", jump);
@@ -81,19 +84,15 @@ public class VikingController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("Ground"))
+        if (collision.gameObject.tag == "Ground")
         {
             onGround = false;
-        }
-        else if (collision.gameObject.name.Equals("fence_01(Clone)"))
-        {
-            run = true;
         }
     }
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.tag.Equals("Ground"))
+        if (collision.gameObject.tag == "Ground")
         {
             jump = false;
             onGround = true;
@@ -103,9 +102,13 @@ public class VikingController : MonoBehaviour
             else if (ground.parent.parent.name == "left_road(Clone)" || ground.parent.parent.name == "right_road(Clone)")
                 ground = ground.parent.parent;
         }
-        else if (collision.gameObject.name.Equals("fence_01(Clone)"))
+        else if (collision.gameObject.name == "fence_01 Variant(Clone)")
         {
-            run = false;
+            if (transform.position.y <= 1)
+            {
+                run = false;
+                onGround = false;
+            }
         }
     }
 

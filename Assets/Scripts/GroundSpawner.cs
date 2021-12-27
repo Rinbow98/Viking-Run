@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,8 +22,8 @@ public class GroundSpawner : MonoBehaviour
         rotation = Vector3.zero;
         n = 0;
         rotateCount = 0;
-
-        for(int i = 0; i < 30; i++)
+        
+        for(int i = 0; i < 100; i++)
         {
             Transform t = null;
             if (i == 0)
@@ -90,7 +89,7 @@ public class GroundSpawner : MonoBehaviour
                         t.Rotate(prev.eulerAngles);
                         t.position = prev.position;
                         t.position += prev.rotation * new Vector3(0f, 0f, 8f);
-                        if (Random.Range(0, 4) == 0)
+                        if (Random.Range(0, 4) == 0 && prev.childCount != 3)
                         {
                             Transform b = Instantiate(crossbar);
                             b.parent = t;
@@ -102,12 +101,16 @@ public class GroundSpawner : MonoBehaviour
                             c.Rotate(t.eulerAngles);
                             c.localPosition = new Vector3(0f, 5f, 0f);
                         }
-                        else if (Random.Range (0, 2) == 0)
+                        else if (Random.Range(0, 2) == 0)
                         {
                             Transform c = Instantiate(coin);
                             c.parent = t;
                             c.Rotate(t.eulerAngles);
                             c.localPosition = new Vector3(0f, 5f, 0f);
+                        }
+                        else if (Random.Range(0, 2) == 0 && prev.childCount != 3)
+                        {
+                            t.position += prev.rotation * new Vector3(0f, 0f, 4f);
                         }
                         groundList.Add(t);
                     }
@@ -148,6 +151,10 @@ public class GroundSpawner : MonoBehaviour
                             c.parent = t;
                             c.Rotate(t.eulerAngles);
                             c.localPosition = new Vector3(0f, 5f, 0f);
+                        }
+                        else if (Random.Range(0, 2) == 0 && prev.childCount != 3)
+                        {
+                            t.position += prev.rotation * new Vector3(0f, 0f, 4f);
                         }
                         groundList.Add(t);
                     }

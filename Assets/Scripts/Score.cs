@@ -5,23 +5,28 @@ public class Score : MonoBehaviour
 {
     public Transform player;
     public Text scoreText;
-
-    double score;
     Vector3 lastPosition;
+
+    public float GameScore { get; private set; }
 
     void Start()
     {
-        score = 0;
+        GameScore = 0;
         lastPosition = player.position;
     }
 
     void Update()
     {
         if (player.position.y > 0f)
-            score += (player.position - lastPosition).magnitude;
+            GameScore += (player.position - lastPosition).magnitude;
 
         lastPosition = player.position;
 
-        scoreText.text = "Score : " + score.ToString("0");
+        scoreText.text = "Score : " + GameScore.ToString("0");
+    }
+
+    public void AddScore(float score)
+    {
+        GameScore += score;
     }
 }
