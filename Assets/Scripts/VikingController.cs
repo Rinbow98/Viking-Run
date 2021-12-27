@@ -12,21 +12,28 @@ public class VikingController : MonoBehaviour
     Rigidbody rigidbody;
     Animator animator;
 
-    bool isIdle = true;
-    bool jump = false;
-    bool right = false;
-    bool left = false;
-    bool run = true;
-    bool onGround = true;
-    float rotateTimer = 0f;
+    bool isIdle;
+    bool jump;
+    bool right;
+    bool left;
+    bool run;
+    bool onGround;
+    float rotateTimer;
 
-    Transform ground = null;
+    Transform ground;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        isIdle = true;
+        jump = false;
+        right = false;
+        left = false;
+        run = true;
+        onGround = true;
         rotateTimer = Time.time;
+        ground = null;
     }
 
     void Update()

@@ -62,11 +62,12 @@
     <Compile Include="Assets\Scripts\VikingController.cs" />
     <Compile Include="Assets\Scripts\SceneSwitcher.cs" />
     <Compile Include="Assets\Scripts\MainCamera.cs" />
+    <Compile Include="Assets\Scripts\ShowScore.cs" />
+    <Compile Include="Assets\Scripts\EndGame.cs" />
     <Compile Include="Assets\Scripts\GroundSpawner.cs" />
     <Compile Include="Assets\Scripts\ExitGame.cs" />
     <Compile Include="Assets\Scripts\GroundDestory.cs" />
-    <Compile Include="Assets\Scripts\ShowScore.cs" />
-    <Compile Include="Assets\Scripts\EndGame.cs" />
+    <Compile Include="Assets\Scripts\StartGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Fonts\OFL.txt" />

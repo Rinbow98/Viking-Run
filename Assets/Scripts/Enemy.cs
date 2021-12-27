@@ -8,13 +8,14 @@ public class Enemy : MonoBehaviour
     List<Vector3> positions;
     Transform player;
 
-    public int num = 500;
-    int index = 0;
+    public int num;
+    int index;
 
     void Start()
     {
         positions = new List<Vector3>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        index = 0;
     }
 
     void Update()

@@ -8,7 +8,7 @@ public class MainCamera : MonoBehaviour
 
     Vector3 offset;
 
-    [SerializeField] float smoothing = 3;
+    [SerializeField] float smoothing;
 
     void Start()
     {
