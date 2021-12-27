@@ -3,12 +3,12 @@ using UnityEngine;
 public class HowToPlay : MonoBehaviour
 {
     Canvas HowToPlayUI;
-    public static bool GameStart = false;
+    public static bool GameStart;
 
     void Start()
     {
         HowToPlayUI = GetComponent<Canvas>();
-        Debug.Log(HowToPlayUI.name);
+        GameStart = false;
         Time.timeScale = 0f;
     }
 

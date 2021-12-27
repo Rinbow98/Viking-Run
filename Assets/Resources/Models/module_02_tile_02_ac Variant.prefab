@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: e5b2ff19c6775f644ae3b902cac71da1, type: 3}
       propertyPath: m_Name
-      value: module_02_tile_02_ac
+      value: module_02_tile_02_ac Variant
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e5b2ff19c6775f644ae3b902cac71da1, type: 3}
       propertyPath: m_TagString
@@ -73,3 +73,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e5b2ff19c6775f644ae3b902cac71da1, type: 3}
+--- !u!1 &4561717749012751422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e5b2ff19c6775f644ae3b902cac71da1, type: 3}
+  m_PrefabInstance: {fileID: 4561717749012652702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3526871645782621436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4561717749012751422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2edf297acdec6c34595a13a6dc3ddb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

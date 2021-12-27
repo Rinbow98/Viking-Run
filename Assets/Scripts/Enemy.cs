@@ -6,7 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     List<Vector3> positions;
-    public Transform player;
+    Transform player;
 
     public int num = 500;
     int index = 0;
@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         positions = new List<Vector3>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()

@@ -23,7 +23,7 @@ public class GroundSpawner : MonoBehaviour
         n = 0;
         rotateCount = 0;
         
-        for(int i = 0; i < 100; i++)
+        for(int i = 0; i < 10; i++)
         {
             Transform t = null;
             if (i == 0)
@@ -174,23 +174,152 @@ public class GroundSpawner : MonoBehaviour
     {
         for(int i = 0; i < groundList.Count; i++)
         {
-            if (GameObject.Find(groundList[i].name) == null)
+            if (groundList[i] == null)
             {
+                Transform t;
                 Transform prev;
                 if (i == 0)
                     prev = groundList[groundList.Count - 1];
                 else
                     prev = groundList[i - 1];
 
-                switch (Random.Range(0, 3))
+                if (prev.name == "left_road(Clone)")
                 {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    default:
-                        break;
+                    t = Instantiate(straight);
+                    t.parent = transform;
+                    t.Rotate(prev.eulerAngles);
+                    t.Rotate(0f, -90f, 0f);
+                    t.position = prev.position;
+                    t.position += prev.rotation * new Vector3(-15f, 0f, 0f);
+                    if (Random.Range(0, 4) == 0 && prev.childCount != 3)
+                    {
+                        Transform b = Instantiate(crossbar);
+                        b.parent = t;
+                        b.Rotate(t.rotation.eulerAngles);
+                        b.localPosition = new Vector3(0f, 1f, 0f);
+
+                        Transform c = Instantiate(coin);
+                        c.parent = t;
+                        c.Rotate(t.eulerAngles);
+                        c.localPosition = new Vector3(0f, 5f, 0f);
+                    }
+                    else if (Random.Range(0, 2) == 0)
+                    {
+                        Transform c = Instantiate(coin);
+                        c.parent = t;
+                        c.Rotate(t.eulerAngles);
+                        c.localPosition = new Vector3(0f, 5f, 0f);
+                    }
+                    else if (Random.Range(0, 2) == 0 && prev.childCount != 3)
+                    {
+                        t.position += prev.rotation * new Vector3(0f, 0f, 4f);
+                    }
                 }
+                else if (prev.name == "right_road(Clone)")
+                {
+                    t = Instantiate(straight);
+                    t.parent = transform;
+                    t.Rotate(prev.eulerAngles);
+                    t.Rotate(0f, 90f, 0f);
+                    t.position = prev.position;
+                    t.position += prev.rotation * new Vector3(15f, 0f, 0f);
+                    if (Random.Range(0, 4) == 0 && prev.childCount != 3)
+                    {
+                        Transform b = Instantiate(crossbar);
+                        b.parent = t;
+                        b.Rotate(t.rotation.eulerAngles);
+                        b.localPosition = new Vector3(0f, 1f, 0f);
+
+                        Transform c = Instantiate(coin);
+                        c.parent = t;
+                        c.Rotate(t.eulerAngles);
+                        c.localPosition = new Vector3(0f, 5f, 0f);
+                    }
+                    else if (Random.Range(0, 2) == 0)
+                    {
+                        Transform c = Instantiate(coin);
+                        c.parent = t;
+                        c.Rotate(t.eulerAngles);
+                        c.localPosition = new Vector3(0f, 5f, 0f);
+                    }
+                    else if (Random.Range(0, 2) == 0 && prev.childCount != 3)
+                    {
+                        t.position += prev.rotation * new Vector3(0f, 0f, 4f);
+                    }
+                }
+                else
+                {
+                    int rand = Random.Range(0, 5);
+                    switch (rand)
+                    {
+                        case 0:
+                            if (rotateCount == 2)
+                            {
+                                t = Instantiate(right);
+                                rotateCount = -1;
+                            }
+                            else
+                            {
+                                t = Instantiate(left);
+                                if (rotateCount == 1)
+                                    rotateCount++;
+                                else
+                                    rotateCount = 1;
+                            }
+                            break;
+                        case 1:
+                            if (rotateCount == -2)
+                            {
+                                t = Instantiate(left);
+                                rotateCount = 1;
+                            }
+                            else
+                            {
+                                t = Instantiate(right);
+                                if (rotateCount == -1)
+                                    rotateCount--;
+                                else
+                                    rotateCount = -1;
+                            }
+                            break;
+                        default:
+                            t = Instantiate(straight);
+                            break;
+                    }
+                    t.parent = transform;
+                    t.Rotate(prev.eulerAngles);
+                    t.position = prev.position;
+                    if (rand < 2)
+                        t.position += prev.rotation * new Vector3(0f, 0f, 15f);
+                    else
+                    {
+                        t.position += prev.rotation * new Vector3(0f, 0f, 8f);
+                        if (Random.Range(0, 4) == 0 && prev.childCount != 3)
+                        {
+                            Transform b = Instantiate(crossbar);
+                            b.parent = t;
+                            b.Rotate(t.rotation.eulerAngles);
+                            b.localPosition = new Vector3(0f, 1f, 0f);
+
+                            Transform c = Instantiate(coin);
+                            c.parent = t;
+                            c.Rotate(t.eulerAngles);
+                            c.localPosition = new Vector3(0f, 5f, 0f);
+                        }
+                        else if (Random.Range(0, 2) == 0)
+                        {
+                            Transform c = Instantiate(coin);
+                            c.parent = t;
+                            c.Rotate(t.eulerAngles);
+                            c.localPosition = new Vector3(0f, 5f, 0f);
+                        }
+                        else if (Random.Range(0, 2) == 0 && prev.childCount != 3)
+                        {
+                            t.position += prev.rotation * new Vector3(0f, 0f, 4f);
+                        }
+                    }
+                }
+                groundList[i] = t;
             }
         }
     }

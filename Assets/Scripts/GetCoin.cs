@@ -8,7 +8,6 @@ public class GetCoin : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Coin: " + other.gameObject.tag);
         if (other.gameObject.tag == "Player")
         {
             FindObjectOfType<Score>().AddScore(20f);

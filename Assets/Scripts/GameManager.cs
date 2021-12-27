@@ -3,11 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    bool Ended = false;
+    public static bool Ended;
 
-    private void Start()
+    void Start()
     {
+        Ended = false;
+    }
 
+    void Update()
+    {
+        if (Ended && Input.anyKey)
+        {
+            Restart();
+        }
     }
 
     public void EndGame()
@@ -15,24 +23,13 @@ public class GameManager : MonoBehaviour
         if (!Ended)
         {
             Ended = true;
-            Debug.Log("Gameover");
-            Invoke("Restart", 2f);
+            Time.timeScale = 0f;
         }
     }
 
     void Restart()
     {
-        SceneManager.LoadScene(0);
-    }
-
-    public void HowToPlay()
-    {
-        
-    }
-
-    public void EndScreen()
-    {
-
+        SceneManager.LoadScene(1);
     }
 
 }

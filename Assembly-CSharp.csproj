@@ -54,16 +54,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Enemy.cs" />
+    <Compile Include="Assets\Scripts\GoToMenu.cs" />
     <Compile Include="Assets\Scripts\GetCoin.cs" />
     <Compile Include="Assets\Scripts\Score.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\HowToPlay.cs" />
     <Compile Include="Assets\Scripts\VikingController.cs" />
     <Compile Include="Assets\Scripts\SceneSwitcher.cs" />
     <Compile Include="Assets\Scripts\MainCamera.cs" />
     <Compile Include="Assets\Scripts\GroundSpawner.cs" />
     <Compile Include="Assets\Scripts\ExitGame.cs" />
-    <Compile Include="Assets\Scripts\HowToPlay.cs" />
-    <Compile Include="Assets\Scripts\GoToMenu.cs" />
+    <Compile Include="Assets\Scripts\GroundDestory.cs" />
+    <Compile Include="Assets\Scripts\ShowScore.cs" />
+    <Compile Include="Assets\Scripts\EndGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Fonts\OFL.txt" />
